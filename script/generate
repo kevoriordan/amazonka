@@ -2,5 +2,14 @@
 
 set -euo pipefail
 
+git checkout -B develop-gen
+
+git merge -s recursive -X ours develop
+
 ./script/generate-travis
 ./script/generate-stack
+
+pushd gen && make gen && popd
+
+git add -A .
+git commit -am "Regenerate from $(git rev-parse HEAD)"
