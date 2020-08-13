@@ -26,3 +26,16 @@ To add support for `${NEW_SERVICE}`, follow these steps:
 
 1. Commit and open a PR to `EarnestResearch/amazonka`'s develop branch.
 
+1. Wait for it to be approved and merged.
+
+1. Regenerate the code on `develop-gen`.
+
+    ```sh
+    scripts/generate
+    ```
+
+1. Check the last commit for sanity, then push the resulting commit to `develop-gen`:
+
+    ```sh
+    git push develop-gen
+    ```
