@@ -227,17 +227,18 @@ getAuth m = \case
         -- Don't try and catch InvalidFileError, or InvalidIAMProfile,
         -- let both errors propagate.
         catching_ _MissingEnvError fromEnv $
-            -- proceed, missing env keys
-            catching _MissingFileError fromFile $ \f ->
-                -- proceed, missing credentials file
-                catching_ _MissingEnvError (fromContainer m) $ do
-                  -- proceed, missing env key
-                  p <- EC2.isEC2 m
-                  unless p $
-                      -- not an EC2 instance, rethrow the previous error.
-                      throwingM _MissingFileError f
-                   -- proceed, check EC2 metadata for IAM information.
-                  fromProfile m
+            catching_ _MissingEnvError fromWebIdentityToken $
+                -- proceed, missing env keys
+                catching _MissingFileError fromFile $ \f ->
+                    -- proceed, missing credentials file
+                    catching_ _MissingEnvError (fromContainer m) $ do
+                    -- proceed, missing env key
+                    p <- EC2.isEC2 m
+                    unless p $
+                        -- not an EC2 instance, rethrow the previous error.
+                        throwingM _MissingFileError f
+                    -- proceed, check EC2 metadata for IAM information.
+                    fromProfile m
 
 
 
