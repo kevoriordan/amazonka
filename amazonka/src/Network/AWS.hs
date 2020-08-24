@@ -33,7 +33,7 @@ module Network.AWS
     , runResourceT
 
     -- * Authentication and Environment
-    , newEnv
+    , Env.newEnv
     , Env
     , HasEnv       (..)
 
@@ -167,15 +167,16 @@ import Control.Monad.Trans.Resource
 
 import Data.Conduit (ConduitM, transPipe)
 
-import Network.AWS.Auth
-import Network.AWS.Env             (Env, HasEnv (..), newEnv)
-import Network.AWS.Internal.Body
-import Network.AWS.Internal.Logger
-import Network.AWS.Lens            ((^.))
-import Network.AWS.Pager           (AWSPager)
-import Network.AWS.Prelude
-import Network.AWS.Types           hiding (LogLevel (..))
-import Network.AWS.Waiter          (Wait)
+import           Network.AWS.AuthTypes
+import qualified Network.AWS.Env             as Env
+import           Network.AWS.EnvTypes        (Env, HasEnv (..))
+import           Network.AWS.Internal.Body
+import           Network.AWS.Internal.Logger
+import           Network.AWS.Lens            ((^.))
+import           Network.AWS.Pager           (AWSPager)
+import           Network.AWS.Prelude
+import           Network.AWS.Types           hiding (LogLevel (..))
+import           Network.AWS.Waiter          (Wait)
 
 import qualified Control.Monad.RWS.Lazy      as LRW
 import qualified Control.Monad.RWS.Strict    as RW
@@ -185,7 +186,6 @@ import qualified Control.Monad.Trans.AWS     as AWST
 import qualified Control.Monad.Writer.Lazy   as LW
 import qualified Control.Monad.Writer.Strict as W
 import qualified Network.AWS.EC2.Metadata    as EC2
-import qualified Network.AWS.Env             as Env
 
 -- | A specialisation of the 'AWST' transformer.
 type AWS = AWST (ResourceT IO)
