@@ -4,6 +4,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RankNTypes        #-}
 {-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE ViewPatterns      #-}
+
 
 -- |
 -- Module      : Network.AWS.Internal.Env
@@ -18,7 +20,8 @@
 module Network.AWS.Internal.Env
     (
     -- * Creating the Environment
-      Env      (..)
+      emptyCredentialsEnv
+    , Env      (..)
     , HasEnv   (..)
 
     -- * Overriding Default Configuration
@@ -35,19 +38,23 @@ module Network.AWS.Internal.Env
     , retryConnectionFailure
     ) where
 
+import Control.Monad.Catch
 import Control.Monad.Reader
 
 import Data.Function (on)
 import Data.IORef
+import Data.Maybe    (fromMaybe)
 import Data.Monoid
 
 import Network.AWS.Internal.Auth
 import Network.AWS.Internal.Logger
 import Network.AWS.Lens            (Getter, Lens', lens, to, (.~), (<>~), (?~))
-import Network.AWS.Types
+import Network.AWS.Types           (Region (NorthVirginia), Seconds,
+                                    Service (_svcAbbrev), retryAttempts,
+                                    serviceRetry, serviceTimeout)
 import Network.HTTP.Conduit        (HttpException (HttpExceptionRequest, InvalidUrlException),
                                     HttpExceptionContent (ConnectionClosed, ConnectionFailure, ConnectionTimeout, InternalException, NoResponseDataReceived),
-                                    Manager)
+                                    Manager, newManager, tlsManagerSettings)
 
 -- | The environment containing the parameters required to make AWS requests.
 data Env = Env
@@ -189,3 +196,19 @@ retryConnectionFailure limit n _ = \case
     TlsException               {} -> True
     _                             -> False
 #endif
+
+-- | Creates a new environment with a new 'Manager' without debug logging
+-- and empty credentials. Intended only for use with
+-- sts:AssumeRoleWithWebIdentity calls
+--
+-- /See:/ 'newEnvWith'.
+emptyCredentialsEnv :: (Applicative m, MonadIO m, MonadCatch m)
+       => m Env
+emptyCredentialsEnv = do
+    manager <- liftIO $ newManager tlsManagerSettings
+    (auth, fromMaybe NorthVirginia -> region) <- emptyCredentials
+    Env region logger (retryConnectionFailure 3) mempty manager
+        <$> liftIO (newIORef Nothing)
+        <*> pure auth
+    where
+        logger _ _ = pure ()

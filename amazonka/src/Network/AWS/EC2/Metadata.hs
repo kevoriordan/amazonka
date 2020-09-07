@@ -58,7 +58,6 @@ module Network.AWS.EC2.Metadata
     , pendingTime
     ) where
 
-import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
 import qualified Data.ByteString.Char8  as BS8

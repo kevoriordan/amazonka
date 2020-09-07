@@ -23,12 +23,15 @@ module Network.AWS.Internal.Auth
     -- * Authentication
     -- ** Retrieving Authentication
       Auth         (..)
+    , emptyCredentials
+    , fetchAuthInBackground
 
     -- ** Defaults
     -- *** Environment
     , envAccessKey
     , envSecretKey
     , envSessionToken
+    , envVarRegion
 
     -- *** Credentials File
     , credAccessKey
@@ -80,7 +83,7 @@ import Network.AWS.Prelude
 import Network.HTTP.Conduit
 
 import System.Directory   (doesFileExist, getHomeDirectory)
-import System.Environment
+import System.Environment (lookupEnv)
 import System.Mem.Weak
 
 import qualified Data.ByteString.Char8      as BS8
@@ -107,8 +110,12 @@ envProfile :: Text -- ^ AWS_PROFILE
 envProfile = "AWS_PROFILE"
 
 -- | Default region environment variable
-envRegion :: Text -- ^ AWS_REGION
-envRegion = "AWS_REGION"
+envVarRegion :: Text -- ^ AWS_REGION
+envVarRegion = "AWS_REGION"
+
+-- | Legacy style default region environment variable
+envDefaultRegion :: Text -- ^ AWS_DEFAULT_REGION
+envDefaultRegion = "AWS_DEFAULT_REGION"
 
 -- | Path to obtain container credentials environment variable (see
 -- 'FromContainer').
@@ -276,7 +283,7 @@ fromEnv =
         envAccessKey
         envSecretKey
         (Just envSessionToken)
-        (Just envRegion)
+        (Just envVarRegion)
 
 -- | Retrieve access key, secret key and a session token from specific
 -- environment variables.
@@ -439,7 +446,7 @@ fromProfileName m name = do
 --
 -- The ECS container agent provides an access key, secret key, session token,
 -- and expiration time, but it does not include a region, so the region will
--- attempt to be determined from the 'envRegion' environment variable if it is
+-- attempt to be determined from the 'envVarRegion' environment variable if it is
 -- set.
 --
 -- Like 'fromProfileName', additionally starts a refresh thread that will
@@ -480,7 +487,7 @@ fromContainer m = do
 
     getRegion :: MonadIO m => m (Maybe Region)
     getRegion = runMaybeT $ do
-        mr <- MaybeT . liftIO $ lookupEnv (Text.unpack envRegion)
+        mr <- MaybeT . liftIO $ lookupEnv (Text.unpack envVarRegion)
         either (const . MaybeT $ return Nothing)
                return
                (fromText (Text.pack mr))
@@ -522,3 +529,24 @@ fetchAuthInBackground menv = menv >>= \(!env) -> liftIO $
     diff (Time !x) !y = (* 1000000) $ if n > 0 then n else 1
       where
         !n = truncate (diffUTCTime x y) - 60
+
+-- | Return empty credentials
+-- Intended for use with calls such as sts:AssumeRoleWithWebIdentity
+-- which do not require credentials
+emptyCredentials :: MonadIO m => m (Auth, Maybe Region)
+emptyCredentials = do
+    region' <- getRegion
+    pure (auth, region')
+    where
+        auth = Auth (AuthEnv "" (Sensitive "") Nothing Nothing)
+
+        getRegion :: MonadIO m => m (Maybe Region)
+        getRegion = do
+            regionMaybe <- (liftIO . lookupEnv . Text.unpack) envVarRegion
+            case regionMaybe of
+                Just region' -> pure $ either (const Nothing) Just (fromText $ Text.pack region')
+                Nothing -> do
+                    defaultRegionMaybe <- (liftIO . lookupEnv . Text.unpack) envDefaultRegion
+                    case defaultRegionMaybe of
+                        Just defaultRegion -> pure $ either (const Nothing) Just (fromText $ Text.pack defaultRegion)
+                        Nothing -> pure Nothing

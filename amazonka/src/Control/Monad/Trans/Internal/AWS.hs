@@ -176,7 +176,8 @@ import Data.Monoid
 
 import Network.AWS.Internal.Auth
 import Network.AWS.Internal.Body
-import Network.AWS.Internal.Env
+import Network.AWS.Internal.Env    (Env (..), HasEnv (..), configure, once,
+                                    override, reconfigure, timeout, within)
 import Network.AWS.Internal.HTTP
 import Network.AWS.Internal.Logger
 import Network.AWS.Lens            (catching, throwingM, trying, view, (^.))

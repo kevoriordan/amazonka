@@ -64,19 +64,36 @@ module Network.AWS.Auth
 import Control.Monad
 import Control.Monad.Catch
 import Control.Monad.IO.Class
+import Control.Monad.Trans.Internal.AWS
+import Control.Monad.Trans.Maybe        (MaybeT (..))
 
+import Data.Time.Clock.System
 
-import Network.AWS.Data.Log
-import Network.AWS.EC2.Metadata
-import Network.AWS.Internal.Auth
-import Network.AWS.Lens          (catching, catching_, throwingM)
-import Network.AWS.Prelude
-import Network.HTTP.Conduit
+import           Network.AWS.Data.Log
+import qualified Network.AWS.EC2.Metadata                  as EC2
+import           Network.AWS.Internal.Auth
+import           Network.AWS.Internal.Env
+import           Network.AWS.Lens                          (catching, catching_,
+                                                            throwingM, (<&>),
+                                                            (^.))
+import           Network.AWS.Prelude
+import           Network.AWS.STS.AssumeRoleWithWebIdentity
+import           Network.HTTP.Conduit
+
+import System.Environment (lookupEnv)
 
 
 import qualified Data.ByteString.Char8 as BS8
+import qualified Data.Text             as Text
+import qualified Data.Text.IO          as TIO
 
 
+-- | Role arn to assume through web identity (see FromWebIdentityToken)
+envAwsRoleArn :: Text -- ^ AWS_ROLE_ARN
+envAwsRoleArn = "AWS_ROLE_ARN"
+
+envWebIdentityTokenFile :: Text -- ^ AWS_WEB_IDENTITY_TOKEN_FILE
+envWebIdentityTokenFile = "AWS_WEB_IDENTITY_TOKEN_FILE"
 
 
 -- | Determines how AuthN/AuthZ information is retrieved.
@@ -105,6 +122,13 @@ data Credentials
       -- at <http://169.254.170.2> using the path in 'envContainerCredentialsURI'.
       -- See <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html IAM Roles for Tasks>
       -- in the AWS documentation for more information.
+
+    | FromWebIdentityToken
+      -- ^ Obtain credentials using a web identity token, normally supplied by
+      -- an OIDC pvodier.
+      -- See <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html>
+      -- and <https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/>
+      -- for more information
 
     | Discover
       -- ^ Attempt credentials discovery via the following steps:
@@ -139,6 +163,8 @@ instance ToLog Credentials where
             "FromFile " <> build n <> " " <> build f
         FromContainer ->
             "FromContainer"
+        FromWebIdentityToken ->
+            "FromWebIdentityToken"
         Discover ->
             "Discover"
       where
@@ -164,6 +190,7 @@ getAuth m = \case
     FromProfile n       -> fromProfileName m n
     FromFile    n f     -> fromFilePath n f
     FromContainer       -> fromContainer m
+    FromWebIdentityToken -> fromWebIdentityToken
     Discover            ->
         -- Don't try and catch InvalidFileError, or InvalidIAMProfile,
         -- let both errors propagate.
@@ -173,10 +200,47 @@ getAuth m = \case
                 -- proceed, missing credentials file
                 catching_ _MissingEnvError (fromContainer m) $ do
                   -- proceed, missing env key
-                  p <- isEC2 m
+                  p <- EC2.isEC2 m
                   unless p $
                       -- not an EC2 instance, rethrow the previous error.
                       throwingM _MissingFileError f
                    -- proceed, check EC2 metadata for IAM information.
                   fromProfile m
 
+
+-- | Use OIDC token and sts:AssumeRoleWithWebIdentity call to fetch credentials
+fromWebIdentityToken :: (MonadIO m, MonadCatch m) => m (Auth, Maybe Region)
+fromWebIdentityToken = do
+  -- sts:AssumeRoleWtihIdentity doesn't require credentials, credentials
+  -- come from web token
+    env <- emptyCredentialsEnv
+    roleToAssume <- lookupEnvReq envAwsRoleArn <&> Text.pack
+    tokenIdentityFile <- lookupEnvReq envWebIdentityTokenFile
+    auth <- liftIO $ fetchAuthInBackground (renew env roleToAssume tokenIdentityFile)
+    reg  <- getRegion
+    return (auth, reg)
+     where
+        renew :: Env -> Text -> FilePath -> IO AuthEnv
+        renew env roleToAssume tokenIdentityFile = do
+            token <- TIO.readFile tokenIdentityFile
+            roleSessionName <- (\x -> "amazonka-" <> (Text.pack . show . systemSeconds) x) <$> getSystemTime
+            let assumeRoleReq = assumeRoleWithWebIdentity roleToAssume roleSessionName token
+            assumeRoleResp <- runResourceT $ runAWST env $ send assumeRoleReq
+            maybe (throwM . InvalidIAMError $ "No credentials returned") pure $ assumeRoleResp ^. arwwirsCredentials
+
+        getRegion :: MonadIO m => m (Maybe Region)
+        getRegion = runMaybeT $ do
+            mr <- MaybeT $ lookupEnvOpt envVarRegion
+            either (const . MaybeT $ return Nothing)
+                    return
+                    (fromText (Text.pack mr))
+
+lookupEnvOpt :: MonadIO m => Text -> m (Maybe FilePath)
+lookupEnvOpt key = liftIO (lookupEnv (Text.unpack key))
+
+lookupEnvReq :: (MonadIO m, MonadThrow m) => Text -> m FilePath
+lookupEnvReq key = do
+        m <- lookupEnvOpt key
+        maybe (throwM . MissingEnvError $ "Unable to read ENV variable: " <> key)
+              return
+              m
