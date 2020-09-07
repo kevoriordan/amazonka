@@ -55,9 +55,12 @@ library
         , Network.AWS.Presign
 
     other-modules:
-          Network.AWS.Internal.Body
+          Network.AWS.Internal.Auth
+        , Network.AWS.Internal.Body
+        , Network.AWS.Internal.Env
         , Network.AWS.Internal.HTTP
         , Network.AWS.Internal.Logger
+        , Control.Monad.Trans.Internal.AWS
 
     build-depends:
           amazonka-core       == 1.6.1.*
