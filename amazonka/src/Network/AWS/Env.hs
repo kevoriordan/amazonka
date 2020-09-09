@@ -21,6 +21,18 @@ module Network.AWS.Env
     , Env      (..)
     , HasEnv   (..)
 
+    -- * Overriding Default Configuration
+    , override
+    , configure
+
+    -- * Scoped Actions
+    , reconfigure
+    , within
+    , once
+    , timeout
+
+    -- * Retry HTTP Exceptions
+    , retryConnectionFailure
 )
 
 where
