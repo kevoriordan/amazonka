@@ -65,7 +65,6 @@ import Control.Monad
 import Control.Monad.Catch
 import Control.Monad.IO.Class
 import Control.Monad.Trans.Internal.AWS
-import Control.Monad.Trans.Maybe        (MaybeT (..))
 
 import Data.Time.Clock.System
 
@@ -190,13 +189,13 @@ getAuth m = \case
     FromProfile n       -> fromProfileName m n
     FromFile    n f     -> fromFilePath n f
     FromContainer       -> fromContainer m
-    FromWebIdentityToken -> fromWebIdentityToken
+    FromWebIdentityToken -> fromWebIdentityToken m
     Discover            ->
         -- Don't try and catch InvalidFileError, or InvalidIAMProfile,
         -- let both errors propagate.
         catching_ _MissingEnvError fromEnv $
             -- proceed, missing env keys
-            catching_ _MissingEnvError fromWebIdentityToken $
+            catching_ _MissingEnvError (fromWebIdentityToken m) $
               -- proceed, missing AWS_ROLE_ARN
             catching _MissingFileError fromFile $ \f ->
                 -- proceed, missing credentials file
@@ -211,8 +210,8 @@ getAuth m = \case
 
 
 -- | Use OIDC token and sts:AssumeRoleWithWebIdentity call to fetch credentials
-fromWebIdentityToken :: (MonadIO m, MonadCatch m) => m (Auth, Maybe Region)
-fromWebIdentityToken = do
+fromWebIdentityToken :: (MonadIO m, MonadCatch m) => Manager -> m (Auth, Maybe Region)
+fromWebIdentityToken mgr = do
   -- sts:AssumeRoleWtihIdentity doesn't require credentials, credentials
   -- come from web token
     env <- emptyCredentialsEnv
@@ -230,12 +229,26 @@ fromWebIdentityToken = do
             assumeRoleResp <- runResourceT $ runAWST env $ send assumeRoleReq
             maybe (throwM . InvalidIAMError $ "No credentials returned") pure $ assumeRoleResp ^. arwwirsCredentials
 
-        getRegion :: MonadIO m => m (Maybe Region)
-        getRegion = runMaybeT $ do
-            mr <- MaybeT $ lookupEnvOpt envVarRegion
-            either (const . MaybeT $ return Nothing)
-                    return
-                    (fromText (Text.pack mr))
+        getRegion :: (MonadIO m, MonadCatch m) => m (Maybe Region)
+        getRegion = do
+            maybeRegionFromEnv <- lookupEnvOpt envVarRegion
+            isEc2 <- EC2.isEC2 mgr
+            case maybeRegionFromEnv of
+              Just region' -> pure $ either (const Nothing) Just $ fromText (Text.pack region')
+              Nothing -> if isEc2 then
+                Just <$> lookupRegionFromInstanceDocument
+                else pure Nothing
+
+        lookupRegionFromInstanceDocument :: (MonadIO m, MonadCatch m) => m Region
+        lookupRegionFromInstanceDocument = try (EC2.identity mgr) >>=
+           handleErr (fmap EC2._region) invalidIdentityErr
+
+        handleErr _ _ (Left  e) = throwM (RetrievalError e)
+        handleErr f g (Right x) = either (throwM . g) return (f x)
+
+        invalidIdentityErr = InvalidIAMError
+            . mappend "Error parsing Instance Identity Document "
+            . Text.pack
 
 lookupEnvOpt :: MonadIO m => Text -> m (Maybe FilePath)
 lookupEnvOpt key = liftIO (lookupEnv (Text.unpack key))
